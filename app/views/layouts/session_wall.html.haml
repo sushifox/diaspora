@@ -7,7 +7,7 @@
 %html
   %head
     %title
-      DIASPORA | login
+      = "#{SITE_CONFIG[:name]} | login"
     %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}/
     %meta{"http-equiv"=> "X-UA-Compatible", :content =>"chrome=1" }
     
@@ -48,7 +48,7 @@
     - flash.each do |name, msg|
       = content_tag :div, msg, :id => "flash_#{name}"
     %div#huge_text
-      DIASPORA*
+      = SITE_CONFIG[:name]
     = yield
     
     /= link_to "signup", "/signup"
