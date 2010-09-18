@@ -1,19 +1,100 @@
-= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-  #user
-    %p.username
-      = f.label :username
-      = f.text_field :username
-    %p.user_network
-      ="@#{request.host}"
+#footer_wrap
+  #nav_bg
+  #container
+    #alphalert
+      %b
+        WeLeft is still being built.
+      %br/
+      This is a 
+      %i very 
+      early prototype.
+      %br/
+      Please bear with us!
+    #header
+      #header_fix
+        = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+          .headerspan_1
+            = f.label :username
+            %br/
+            = f.text_field :username, :size => 15, :class => 'greybox fullwidth'
+          .headerspan_2
+            = f.label :password
+            %br/
+            = f.password_field :password, :size => 15, :class => 'greybox fullwidth'
+        
+          .headerspan_3
+        
+            / %p
+            / - if devise_mapping.rememberable?
+            / = f.check_box :remember_me
+            / = f.label :remember_me
+            %br/
+            = f.submit "Sign in", :class => "button"
+    #left
+      %h2
+        Come join us.
+        %br/
+        It's free.
+      %p
+        %b WeLeft 
+        is an open Diaspora seed.
+      %p
+        %b Diaspora 
+        is a social network like MySpace and Facebook, but it's for people who want 
+        %b more privacy.
+      %p
+        No changing terms, no confusing settings. It's free, secure, and easy to use. Sign up now and see why we left.
+    #right
+      %h2
+        Sign up here:
+      = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+        = f.hidden_field :url, :value => request.host
+        %table#signup
+          %tr
+            %td.lefttd
+              = f.label :username
+            %td.righttd
+              = f.text_field :username, :size => 20, :class => "fullwidth whitebox"
+          %tr
+            %td.lefttd
+              = f.label :email
+            %td.righttd
+              = f.text_field :email, :size => 20, :class => "fullwidth whitebox"
+          %tr
+            %td.lefttd
+              = f.label :password
+            %td.righttd
+              = f.password_field :password, :size => 20, :class => "fullwidth whitebox"
+          %tr
+            %td.lefttd
+              = f.label :password_confirmation, "Confirm Password"
+            %td.righttd
+              = f.password_field :password_confirmation, :size => 20, :class => "fullwidth whitebox"
+          = f.fields_for :person do |p|
+            = p.hidden_field :url, :value => request.host
+            = p.fields_for :profile do |pr|
+              %tr
+                %td.lefttd
+                  = pr.label :first_name
+                %td.righttd
+                  = pr.text_field :first_name, :size => 20, :class => "fullwidth whitebox"
+              %tr
+                %td.lefttd
+                  = pr.label :last_name
+                %td.righttd
+                  = pr.text_field :last_name, :size => 20, :class => "fullwidth whitebox"
+          %tr
+            %td.lefttd
+            %td.righttd
+              = f.submit "Sign me up", :class => "button"
+          %tr
+            %td.lefttd
+            %td.righttd
+              %span.smalltext
+                = link_to "Forgot your password?", new_password_path(resource_name)
 
-    %p
-      = f.label :password
-      = f.password_field :password
-  /%p
-  /- if devise_mapping.rememberable?
-  /  = f.check_box :remember_me
-  /  = f.label :remember_me
-  = f.submit "Sign in"
-  %p
-= render :partial => "devise/shared/links"
-
+  .footer_push
+#footer
+  %a{:href => "http://www.joindiaspora.com"} Diaspora* 
+  &nbsp;&mdash;&nbsp; WeLeft is &copy; George Bashi and Craig Ede 2010; all rights reserved &nbsp;&mdash;&nbsp; Front page design by 
+  %a{:href => "http://sushifox.co.uk/"} sushifox
